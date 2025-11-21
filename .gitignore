@@ -1,0 +1,86 @@
+# ============================
+#  AMBIENTE PYTHON / FLASK
+# ============================
+
+# Virtual env
+venv/
+ENV/
+env/
+.venv/
+
+# Bytecode e cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyd
+*.pdb
+*.pdb
+
+# Config do Flask / instancia
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# Arquivos de log
+*.log
+
+# ============================
+#  MIGRATIONS – FLASK-MIGRATE
+# ============================
+migrations/versions/*.pyc
+migrations/versions/__pycache__/
+migrations/*.pyc
+migrations/__pycache__/
+
+# Se quiser ignorar TODAS as versões geradas:
+# migrations/versions/
+
+# ============================
+#  IDEs
+# ============================
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+*.iml
+
+# ============================
+#  SISTEMA OPERACIONAL
+# ============================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# ============================
+#  OUTROS
+# ============================
+
+# Arquivos temporários
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Arquivos de ambiente
+.env
+.env.*
+
+# Pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
