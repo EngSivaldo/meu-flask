@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Produtos Cadastrados</h1>
+
+    <!-- Botão para adicionar produto -->
+    <a href="{{ url_for('main.add_produto') }}" class="btn btn-primary mb-3">Adicionar Produto</a>
+
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Quantidade</th> <!-- Coluna adicionada -->
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for produto in produtos %}
+            <tr>
+                <td>{{ produto.nome }}</td>
+                <td>R${{ "%.2f"|format(produto.preco) }}</td>
+                <td>{{ produto.quantidade }}</td> <!-- Exibe quantidade -->
+                <td>
+                    <!-- Botão Editar -->
+                    <a href="{{ url_for('main.edit_produto', id=produto.id) }}" class="btn btn-warning btn-sm">Editar</a>
+
+                    <!-- Botão Deletar -->
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ produto.id }}">
+                        Deletar
+                    </button>
+
+                    <!-- Modal de confirmação de deleção -->
+                    <div class="modal fade" id="confirmDeleteModal{{ produto.id }}" tabindex="-1" aria-labelledby="modalLabel{{ produto.id }}" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel{{ produto.id }}">Confirmação</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                          </div>
+                          <div class="modal-body">
+                            Deseja realmente deletar o produto <strong>{{ produto.nome }}</strong>?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <form method="POST" action="{{ url_for('main.delete_produto', id=produto.id) }}" style="display:inline;">
+                                {{ delete_form.hidden_tag() }}
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">Nenhum produto cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

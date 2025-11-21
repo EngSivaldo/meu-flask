@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Adicionar Produto</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }} <!-- CSRF invisível -->
+
+    <div class="mb-3">
+        {{ form.nome.label(class="form-label") }}
+        {{ form.nome(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.preco.label(class="form-label") }}
+        {{ form.preco(class="form-control") }}
+    </div>
+
+    {{ form.submit(class="btn btn-success") }}
+</form>
+
+<a href="{{ url_for('main.home') }}" class="btn btn-secondary mt-3">Voltar</a>
+{% endblock %}
